@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ConfigTool">
+</Property><Property Name="Solution File" Value="C:\Projects\ConfigTool\ConfigTool.sln">
+</Property><Property Name="User Options File" Value="C:\Projects\ConfigTool\ConfigTool.suo">
+</Property><Property Name="Date" Value="Saturday, January 11, 2014">
+</Property><Property Name="Time" Value="9:50 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ConfigTool.sln" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool.sln">
+</Event><Event ErrorLevel="0" Project="" Source="ConfigTool.suo" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool.suo">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\ConfigTool.csproj" Description="Project file successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\ConfigTool.csproj">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Form1.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Form1.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Form1.Designer.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Program.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Program.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Properties\Resources.Designer.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\PropertyComparer.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\PropertyComparer.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\SortableBindingList.cs" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\SortableBindingList.cs">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\App.config" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\App.config">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Properties\Settings.settings" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Form1.resx" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Form1.resx">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\Properties\Resources.resx" Description="File successfully backed up as C:\Projects\ConfigTool\Backup\ConfigTool\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\ConfigTool.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ConfigTool" Source="ConfigTool\ConfigTool.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ConfigTool.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ConfigTool.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ConfigTool" Source="ConfigTool\ConfigTool.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

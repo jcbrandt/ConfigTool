@@ -1,0 +1,9 @@
+C:\Projects\ConfigTool\ConfigTool\bin\Debug\ConfigTool.exe
+C:\Projects\ConfigTool\ConfigTool\bin\Debug\ConfigTool.pdb
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.Properties.Resources.resources
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.csproj.GenerateResource.Cache
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.exe
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.pdb
+C:\Projects\ConfigTool\ConfigTool\bin\Debug\ConfigTool.exe.config
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.csprojResolveAssemblyReference.cache
+C:\Projects\ConfigTool\ConfigTool\obj\Debug\ConfigTool.ConfigEditorForm.resources

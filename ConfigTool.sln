@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\ConfigTool.csproj", "{732764F6-2825-4505-9F5B-9E954A5ECF1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{732764F6-2825-4505-9F5B-9E954A5ECF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732764F6-2825-4505-9F5B-9E954A5ECF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732764F6-2825-4505-9F5B-9E954A5ECF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732764F6-2825-4505-9F5B-9E954A5ECF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
