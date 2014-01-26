@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.insertNewRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +54,7 @@
             this.gbServices = new System.Windows.Forms.GroupBox();
             this.rbSynchronizedEdit = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbGenPass.SuspendLayout();
             this.gbServices.SuspendLayout();
@@ -85,6 +89,20 @@
             this.Value.HeaderText = "Value";
             this.Value.Name = "Value";
             this.Value.Width = 69;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertNewRowToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(182, 28);
+            // 
+            // insertNewRowToolStripMenuItem
+            // 
+            this.insertNewRowToolStripMenuItem.Name = "insertNewRowToolStripMenuItem";
+            this.insertNewRowToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
+            this.insertNewRowToolStripMenuItem.Text = "Insert New Row";
+            this.insertNewRowToolStripMenuItem.Click += new System.EventHandler(this.insertNewRowToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -290,6 +308,7 @@
             this.Text = "Config Editor";
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.ConfigEditorForm_DragOver);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbGenPass.ResumeLayout(false);
@@ -330,6 +349,8 @@
         private System.Windows.Forms.GroupBox gbGenPass;
         private System.Windows.Forms.GroupBox gbServices;
         private System.Windows.Forms.RadioButton rbSynchronizedEdit;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem insertNewRowToolStripMenuItem;
     }
 }
 

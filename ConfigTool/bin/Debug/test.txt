@@ -1,0 +1,1230 @@
+# Copyright (c) 2001-2009 Enterworks, Inc.  All rights reserved. "Enterworks" and the "e." logo are registered trademarks and "Enterworks Catalog Connector" is a trademark of Enterworks, Inc.
+# ANY MODIFICATION OF THIS PORTION OF THE SOFTWARE MUST BE DONE IN ACCORDANCE WITH ENTERWORKS, INC.'S INSTRUCTIONS IN THE ADMINISTRATION GUIDE.  FAILURE TO FOLLOW THESE INSTRUCTIONS WILL VOID ANY SOFTWARE WARRANTY OR SUPPORT PROVIDED BY ENTERWORKS, INC.
+
+
+#############################################################################
+##
+## Application Server Vendor
+##
+appserver.vendor=jboss
+##
+##
+##
+
+#############################################################################
+#
+#  JBoss  environment
+#
+#############################################################################
+##
+## JBoss JNDI Context Factory
+##
+jboss.context.factory=org.jnp.interfaces.NamingContextFactory
+##
+## JBoss URL PKG Prefixes
+##
+jboss.pkg.prefixes=org.jboss.naming
+##
+## JBoss  JNDI Provider URL
+##
+jboss.context.url=ABYSS:8034
+##
+##
+##
+
+#############################################################################
+#
+#  JNDI Client  environment (used by JMS client)
+#
+#############################################################################
+##
+##
+##  Specifies the number of seconds the JNDI client should wait between attempts to
+##  find a given JNDI server if the JNDI server has not been started/restarted.
+##  Its default value is set to 1.
+##
+jndi.client.retry.interval=1
+##
+##
+##  Specifies the number times that the JNDI client should attempt to
+##  find a given JNDI server if the JNDI if the JNDI server has not been started/restarted.
+##  Its default value is set to 3.
+##
+jndi.client.retry.count=3
+##
+##
+
+#############################################################################
+#
+#  Database deadlock retry 
+#
+#############################################################################
+##
+## time interval between retries ( in seconds )
+db.retry.interval=5
+## maximum retries
+db.retry.count=10
+
+
+#############################################################################
+#
+#  Web Apps  environment
+#
+#############################################################################
+##
+##
+##
+webapps.baseUrl=http://ABYSS:80/webcm/
+ddd.eee.ttt=sometingNEW
+webservices.baseUrl=http://ABYSS:80/webcm/
+##
+##
+## The directory under /webcm to place the custom JSP pages which are used to 
+## perform attribute values calculations
+format.attribute.calculation.custom.jsp.dir=/custom
+##
+########################################################################
+#
+# Database setttings
+#
+########################################################################
+##
+#
+epim.connection.dialect=net.sf.hibernate.dialect.SQLServerDialect
+epim.connection.driver_class=net.sourceforge.jtds.jdbc.Driver
+epim.connection.username=pdwadmin
+epim.connection.password=OwIcg/sPx8ffIfGGxZAKYw==
+epim.connection.url=jdbc:jtds:sqlserver://ABYSS:1433/ew_pdw70_epim
+
+##
+########################################################################
+#
+#    Debug settings
+#
+########################################################################
+#
+debug.directory=C:/Enterworks/EnableServer71/log
+debug.file.prefix=webcm
+# Specifies an approximate maximum amount to write (in mega bytes) to 
+# any one file. 
+# If this is zero, then there is no limit. 
+debug.file.rotate.limit=100
+# maximum number of files to rotate in cycle.
+debug.file.rotate.count=5
+
+#
+# If debug is set to 'true', all messages will be logged.
+# If debug is set to 'false', each logger's logging level will be read from the section below.
+#
+debug=false
+#
+# Default logging levels for each logger.  They can be set to:
+#   SEVERE (highest value), WARNING, INFO, CONFIG, FINE, FINER, FINEST, ALL, OFF
+# If a logger level is not specified here, it will be set to INFO.
+#
+com.enterworks.epim.io.level=SEVERE
+com.enterworks.epim.db.level=SEVERE
+com.enterworks.epim.ejb.level=SEVERE
+com.enterworks.epim.webapp.level=SEVERE
+com.enterworks.epim.facade.level=SEVERE
+
+# Crypto: Encryption provider
+#encryption.provider.class=com.rsa.jsafe.provider.JsafeJCE
+#encryption.provider.name=JsafeJCE
+
+encryption.provider.class=com.sun.crypto.provider.SunJCE
+encryption.provider.name=SunJCE
+
+# Settings for symmetric algorithm used for data encryption
+symmetric.algo.mode=CBC
+symmetric.algo.padding=PKCS5Padding
+
+########################################################################
+#
+# Validation and Other Log file settings
+#
+########################################################################
+epim.web.log.base.dir=C:/Enterworks/EnableServer71/log
+validation.output.path=C:/Enterworks/EnableServer71/log/validation
+syncIn.output.path=C:/Enterworks/EnableServer71/log/syncIn
+pendingRequest.output.path=C:/Enterworks/EnableServer71/log/pendingRequest
+cleanup.log.dir=C:/Enterworks/EnableServer71/log/cleanup
+
+########################################################################
+# sync in batch size
+########################################################################
+sync.in.batch.size=10000
+sync.in.batch.commit.count=25
+sync.in.excel.rows.per.sheet=40000
+########################################################################
+# sync in - allow delete from repository when itemID not in data source
+########################################################################
+sync.in.repository.delete.allow=no
+
+########################################################################
+#
+# Sync Out path settings
+#
+########################################################################
+sync.out.output.path=C:/Enterworks/EnableServer71/log/syncOut
+
+########################################################################
+#
+# Sync Out file size settings
+#
+########################################################################
+#10KB file size
+sync.out.output.file.size.limit=10240
+#100KB file size
+#sync.out.output.file.size.limit=102400
+#1MB file size
+#sync.out.output.file.size.limit=1048576
+#10MB file size
+#sync.out.output.file.size.limit=10485760
+#25MB file size
+#sync.out.output.file.size.limit=26214400
+#50MB file size
+#sync.out.output.file.size.limit=52428800
+#100MB file size
+#sync.out.output.file.size.limit=104857600
+
+########################################################################
+#
+# Sync Out settings for UCCNet format Only
+# XML Header Registry values:
+# 0 - TEST REGISTRY (Default)
+# 1 - PRODUCTION REGISTRY
+# 2 - STAGE REGISTRY
+#
+########################################################################
+sync.out.uccnet.registry.header=0
+
+########################################################################
+#
+# Validation settings
+# set to 1 to stop validating all rules for an item after encountering first error
+# set to 0 to continue validating all rules for an item even after encountering error
+# Note: will only affect validation job and sync out job
+########################################################################
+validation.error.stop=0
+
+########################################################################
+#
+# Catalog Factory settings
+#
+########################################################################
+# maximum number for catalog.page.size is 1000
+catalog.page.size=200
+catalog.format.epim=com.enterworks.epim.shared.catalog.epimInternal.EPIMInternalCatalog
+catalog.format.uccnet=com.enterworks.epim.shared.catalog.uccnet.UCCNetCatalog
+
+########################################################################
+#
+# Temp Upload File settings
+#
+########################################################################
+
+temp.file.base.directory.upload=C:/Enterworks/EnableServer71/tempfileupload
+
+########################################################################
+#
+# DSN File settings
+#
+########################################################################
+
+dsn.file.base.directory.upload=C:/Enterworks/EnableServer71/dsnfileupload
+dsn.file.base.directory.copy=C:/Enterworks/EnableServer71/dsnfilecopy
+dsn.syncData.rows.per.plt.commit=25
+dsn.syncData.rows.per.commit=1000
+dsn.syncData.defaultMsgId=
+dsn.syncData.defaultTransId=
+dsn.syncData.defaultStateUpdateMsg=
+
+########################################################################
+#
+# PLT Mappings
+#
+########################################################################
+
+# maximum column name sizes
+plt.colsize.mssql.max=128
+plt.colsize.ora.max=30
+plt.colsize.max=30
+
+# maxmum length of character
+plt.charSize.mssql.max=4000
+plt.charSize.ora.max=4000
+plt.charSize.max=4000
+
+# number of digits to be used for long column names
+plt.map.suffix=2
+
+# plt mapping for sqlserver
+plt.map.mssql.BIGINT=BIGINT
+plt.map.mssql.BINARY=
+plt.map.mssql.BIT=BIT
+plt.map.mssql.BOOLEAN=SMALLINT
+plt.map.mssql.CHAR=VARCHAR
+plt.map.mssql.DECIMAL=DECIMAL
+plt.map.mssql.DATE=DATETIME
+plt.map.mssql.DATETIME=DATETIME
+plt.map.mssql.FLOAT=FLOAT
+plt.map.mssql.INTEGER=INTEGER
+plt.map.mssql.LONGVARBINARY=
+plt.map.mssql.LONGVARCHAR=VARCHAR
+plt.map.mssql.NCHAR=NCHAR
+plt.map.mssql.NUMERIC=INTEGER
+plt.map.mssql.NVARCHAR=NVARCHAR
+plt.map.mssql.REAL=REAL
+plt.map.mssql.SMALLINT=SMALLINT
+plt.map.mssql.TIMESTAMP=DATETIME
+plt.map.mssql.TINYINT=TINYINT
+plt.map.mssql.VARBINARY=
+plt.map.mssql.VARCHAR=NVARCHAR
+plt.map.mssql.CURRENCY=DECIMAL
+
+# plt mapping for oracle
+plt.map.ora.BIGINT=INTEGER
+plt.map.ora.BINARY=
+plt.map.ora.BIT=INTEGER
+plt.map.ora.BOOLEAN=SMALLINT
+plt.map.ora.CHAR=VARCHAR2
+plt.map.ora.DATETIME=VARCHAR2
+plt.map.ora.TIMESTAMP=VARCHAR2
+plt.map.ora.DECIMAL=DECIMAL
+plt.map.ora.FLOAT=FLOAT
+plt.map.ora.LONGVARBINARY=
+plt.map.ora.INTEGER=INTEGER
+plt.map.ora.DOUBLE=DECIMAL
+plt.map.ora.REAL=REAL
+plt.map.ora.SMALLINT=SMALLINT
+plt.map.ora.LONGVARCHAR=VARCHAR
+plt.map.ora.TINYINT=TINYINT
+plt.map.ora.VARBINARY=
+plt.map.ora.VARCHAR=VARCHAR2
+plt.map.ora.NUMERIC=NUMBER
+plt.map.ora.DATE=VARCHAR2
+plt.map.ora.CURRENCY=DECIMAL
+
+# default mapping for unnamed database
+plt.map.BIGINT=BIGINT
+plt.map.BINARY=
+plt.map.BIT=BIT
+plt.map.CHAR=NCHAR
+plt.map.DATETIME=DATE
+plt.map.TIMESTAMP=DATE
+plt.map.DECIMAL=DECIMAL
+plt.map.FLOAT=FLOAT
+plt.map.LONGVARBINARY=
+plt.map.INTEGER=INTEGER
+plt.map.REAL=REAL
+plt.map.SMALLINT=SMALLINT
+plt.map.LONGVARCHAR=NVARCHAR
+plt.map.TINYINT=TINYINT
+plt.map.VARBINARY=
+plt.map.VARCHAR=NVARCHAR
+
+########################################################################
+#
+# Default Encoding
+#
+########################################################################
+default.encoding=WINDOWS-1251
+profile.importExport.encoding=UTF-8
+
+########################################################################
+#
+# UI Settings
+#
+########################################################################
+#UI.home.page.url=/ReportRepositoryStatus.do?epimAction=Start
+UI.modalWindow.sizeS=400x300
+UI.modalWindow.sizeM=800x600
+UI.modalWindow.sizeXL=1024x800
+
+########################################################################
+#
+# Master Repository Editor
+#
+########################################################################
+
+repository.editor.rownumber.default=20
+repository.editor.rownumber.max=200
+repository.editor.primary.key.copy.clear=0
+
+########################################################################
+#
+# Repository Listing Editor
+#
+########################################################################
+repository.editor.UI.grid.pager=20,50,100
+repository.editor.UI.grid.view.type=1
+repository.editor.editItem.UI.modalWindow.size=.95
+repository.editor.importToSavedSet.UI.modalWindow.size=800x600
+repository.editor.export.UI.modalWindow.size=800x500
+repository.editor.import.UI.modalWindow.size=800x600
+
+########################################################################
+#
+# Templates Editor
+#
+########################################################################
+#templates.export.listing.UI.grid.pager=20,50,100
+#templates.import.listing.UI.grid.pager=20,50,100
+templates.UI.modalWindow.size=850x600
+templates.mappings.UI.modalWindow.size=.95
+templates.promote.UI.modalWindow.size=0.9
+templates.import.UI.modalWindow.size=700x500
+templates.export.UI.modalWindow.size=500x300
+templates.export.job.UI.modalWindow.size=800x600
+
+########################################################################
+#
+# Style Map Editor
+#
+########################################################################
+styleMap.UI.modalWindow.size=700x500
+styleMap.import.UI.modalWindow.size=700x500
+styleMap.export.UI.modalWindow.size=500x300
+
+########################################################################
+#
+# Import Config Editor
+#
+########################################################################
+importConfig.UI.modalWindow.size=980x740
+importConfig.import.UI.modalWindow.size=800x600
+importConfig.export.UI.modalWindow.size=360x240
+importConfig.export.job.UI.modalWindow.size=800x600
+
+########################################################################
+#
+# Code Set Editor
+# Taxonomy, Hierarchy, Code Set share the same
+#
+########################################################################
+codeSet.UI.modalWindow.size=750x500
+codeSet.import.UI.modalWindow.size=800x500
+codeSet.extendedAttr.UI.modalWindow.size=900x600
+codeSet.dynamicAssoc.UI.modalWindow.size=800x600
+
+########################################################################
+#
+# Job Monitor
+#
+########################################################################
+job.history.UI.modalWindow.size=600x400
+
+########################################################################
+#
+# Job History
+#
+########################################################################
+# Job History page auto refresh interval in seconds, default to 30 seconds
+# If this property is set to 0 or not set, then no auto refresh for the job history page.
+job.history.autoRefreshInterval=30
+
+########################################################################
+#
+# Security Editor
+#
+########################################################################
+security.UI.modalWindow.size=800x550
+
+########################################################################
+#
+# Item Editor
+#
+########################################################################
+item.history.UI.modalWindow.size=800x500
+item.pendingRequest.UI.modalWindow.size=800x500
+
+########################################################################
+#
+# Item Editor CodeSet Detail Search Setting
+#
+########################################################################
+
+repository.editor.item.codesetdetailsearch.threshold=1500
+repository.editor.item.codesetdetailsearch.maxreturnresults=200
+
+########################################################################
+#
+# Item Editor TextBox/Dropdown box Display Width Settings
+#
+########################################################################
+repository.editor.item.displaywidth.textbox=231
+repository.editor.item.displaywidth.textarea=231
+repository.editor.item.displaywidth.associationgroup=300
+repository.editor.item.displaywidth.repeatableformatattr=300
+repository.editor.assocgroup.displaywidth.textbox=231
+repository.editor.assocgroup.displaywidth.textarea=231
+repository.editor.repeatableformatattr.displaywidth.textbox=231
+repository.editor.repeatableformatattr.displaywidth.textarea=231
+
+########################################################################
+#
+# Item Editor Link Listing Settings
+#
+########################################################################
+repository.editor.item.linkeditemlisting.sfdisplaywidth=50
+repository.editor.item.linkeditemlisting.sfseparator=|
+repository.editor.item.linkeditemlisting.rowperpage=10
+
+########################################################################
+#
+# Record Listing Settings
+#
+########################################################################
+recordlisting.editallwhenopen=false
+
+########################################################################
+#
+# Repository Audit Log for Properties
+#
+########################################################################
+
+repository.auditlog.rowperpage=20
+
+########################################################################
+#
+# Migration Settings
+#
+########################################################################
+
+##  JBoss Connection Factory
+epim.migration.connectionfactory=ConnectionFactory
+
+##  JBoss Queue
+epim.migration.queue=queue/EPIMMigration
+
+##  zip folder
+epim.migration.path=C:/Enterworks/EnableServer71/migration
+
+##  log folder
+migration.in.output.path=C:/Enterworks/EnableServer71/log/migrationIn
+migration.out.output.path=C:/Enterworks/EnableServer71/log/migrationOut
+
+## export items field separator
+migration.out.fieldSeparator=|
+
+########################################################################
+#
+# Text index log file settings
+#
+########################################################################
+text.index.output.path=C:/Enterworks/EnableServer71/log/textIndex
+
+########################################################################
+#
+# Export File Settings
+#
+########################################################################
+export.output.path=C:/Enterworks/EnableServer71/export
+export.log.path=C:/Enterworks/EnableServer71/log/export
+export.output.prefix=export
+export.fieldSeparator=,
+export.textQualifier="
+export.rowDelimeter=\r\n
+export.rowDelimeter.replace= 
+export.rowDelimiter=\r\n
+export.rowDelimiter.replace=
+export.mediaHeader.uniqueIdentifier=Unique Identifier
+export.mediaHeader.metaData=Meta Data
+export.mediaHeader.link=Link
+export.mediaFolder.name=exportFileMediaFolder
+export.mediaFolder.fileLimit=500
+export.pendingRequest.output.prefix=pendingRequest
+import.pendingRequest.timestamp.format=yyyy-MM-dd HH:mm:ss
+
+########################################################################
+#
+# Publish File Settings
+#
+########################################################################
+publish.output.path=C:/Enterworks/EnableServer71/publication
+publish.log.path=C:/Enterworks/EnableServer71/log/publish
+
+publish.output.encoding=US-ASCII
+publish.output.encoding.indesign=UTF-16
+
+# Column name prefix for publication output tables
+publish.table.column.name.prefix=C_
+
+# For show publication formula in the output file.  Default is true.  Else set to 'no' or 'false'.
+publish.show.formula=
+
+# Prefix image file names in DAM root sub-directory with the sub-directory name.  Set to yes or no.  Default is no. 
+publish.prefix.image.file.name=yes
+
+# Publish output to file or/and table.  'yes' to both. The default is to file only.
+publish.output.file.and.table=
+
+# Replace no alpha-numeric char with '_' in csv column names.  'yes' or 'no'.  Default is 'no'.
+publish.replace.with.underscore.in.csv.column.name=
+
+# Output tag for null value in xml output.  'yes' or 'no'.  Default is 'no'.
+publish.output.null.value.tag=yes
+
+# Column names for vertically displayed elements.
+publish.output.vertical.group.name=Vertical Group Name
+publish.output.vertical.group.value=Vertical Group Value 
+			
+# Enable input CSV file for publishing API; column heading names for values supplied by enable.
+# DO NOT CHANGE THESE without a corresponding enable software change.
+enable.input.file.header.taxonomy.node.value=Original_Taxonomy_Node_Value
+enable.input.file.header.subcategory.prefix=SubCategory_
+enable.input.file.header.subcategory.sort.sufix=_Sort
+
+# Audit log repository name
+publish.audit.logRepoName=
+
+# replace space and special char in column name with '_'.  Default is no.
+publish.replace.column.name=
+
+# Name of repositories that will be logged in publication_detail table. 
+publish.log.repo.name=PIM_Product_Staging,PIM_Item_Staging
+
+# Log to publication_detail table.  'yes' or 'no'.
+publish.detail.log=
+
+# Dam repository values
+dam.varints.attr.name.systemDefined=SystemDefined
+dam.config.attr.key.destinationFolder=DestinationFolder
+dam.config.image.type.original=Original
+
+# PIM id columns in csv output.	 yes/no.  Default is no.
+publish.output.pim.id=no
+
+# csv mapping class old/new.  default is new.
+publish.csv=new
+
+# number of record to fetch on the on root repo.
+publish.root.record.max=200
+
+########################################################################
+#
+# Jobs Settings
+#
+########################################################################
+job.dir=C:/Enterworks/EnableServer71/job
+
+# Number of times a job will be retried by job bean.
+job.retry.limit=0
+# Number of times a syncIn job will attempt to retry a batch that fails.
+job.syncIn.batch.retry.limit=3
+
+# The interval that pending request jobs are checked - in milliseconds 
+pendingRequest.job.interval=1800000
+
+########################################################################
+#
+# Date Format Setting
+#
+########################################################################
+
+# Date format used when reading date values from files or Varchar database columns.
+epim.external.date.format=MM/dd/yyyy
+epim.external.timestamp.format=MM/dd/yyyy HH:mm:ss
+epim.keyword.today=TODAY
+
+# SQL Server date format
+# 120 is the ODBC canonical standard for date format yyyy-mm-dd hh:mi:ss(24h)
+epim.external.timestamp.format.code=120
+
+########################################################################
+#
+# Validation Date Format Setting
+#
+########################################################################
+
+# Date format used when validating date or timestamp attributes; these are comma-separated lists 
+# of valid formats - ALL listed formats are valid.
+#epim.validation.date.formats=MM/dd/yyyy,MM/dd/yy
+epim.validation.date.formats=MM/dd/yyyy
+epim.validation.timestamp.formats=MM/dd/yyyy HH:mm:ss,MM/dd/yy HH:mm:ss
+
+########################################################################
+#
+# Repository Audit Properties
+#
+########################################################################
+
+# Maximum number of days' worth of changes to retrieve.
+epim.audit.properties.max.days=90
+
+
+########################################################################
+#
+# use native data type bindings for item data 
+#
+########################################################################
+use.native.datatype.binding=false
+
+
+########################################################################
+#
+# maximum size of validation log file to be transmitted 
+#
+########################################################################
+max.transmit.file.size=2000000
+
+
+########################################################################
+#
+# browser session timeout (in minutes)
+# after this amount of idle time, session will timeout
+#
+########################################################################
+session.timeout=240
+
+########################################################################
+#
+# validation record count
+# after this amount of records are validated, the counters in the history
+# table will be updated.
+#
+########################################################################
+status.update.limit.validation=2000
+
+######################################################################## 
+# 
+# skipPLTLoad
+# Set this to yes if you want to skip the loading of the remote data into
+# the PLT_* tables.  You may want to do this if you have a large amount
+# of data and your 1st attempt at syncIn loaded all of the remote data but
+# failed during the insert into the RepositoryItem table (this could happen
+# if your database runs out of space).  To take advantage of this parameter,
+# you would set syncIn.skipPLTLoad=yes, then use sqlplus to "delete from
+# b_master_repository_item table where repository_id = [your repository id]".
+# {find repository id with "select master_repository_id, name from b_master_repository"}
+# Doing this will cause the syncIn process to still consider the syncIn a "first Time"
+# syncIn (i.e. calculate GTINs, use default values) but will not attempt the lengthy
+# process of loading the remote data.  You must restart your jboss after 
+# changing this parameter. 
+# 
+######################################################################## 
+syncIn.skipPLTLoad=no
+######################################################################## 
+# 
+# secondTimeSyncFastInserts
+# Set this to yes if you want to have "SecondTimeSyncIn" (i.e. any syncIn that happens
+# once the repository already contains items) look for new items from the data to
+# loaded and insert them using a faster bulk insert statement.  When bulk insert is
+# used, it is faster because individual saves of each item (with accompanying custom
+# callout trigger functions) are not performed.  Set this to no if you desire a custom
+# callout trigger to be executed for inserts as well as updates. You must restart your jboss after 
+# changing this parameter. 
+# 
+######################################################################## 
+syncIn.secondTimeSyncFastInserts=no
+
+########################################################################
+#
+# Switch for displaying EPX related menus 
+#
+########################################################################
+navtree.useprocess=true
+epx.server.host=ABYSS
+epx.server.port=9040
+epx.server.gId=**********
+epx.server.fromApp=epim
+epx.server.login.url=/tm/apps/enable/epxLogin.jsp
+epx.server.box.url=/tm/html/tmbox.tbs
+epx.server.workitem.url=/tm/html/tmbox.twis
+epx.server.create.task.url=/tm/html/tm.edss
+#1 - Show EPX portal inbox, 0 - Use epim task list
+epx.tasklist.type=0
+epx.tasklist.tasks=task1,
+epx.tasklist.task1.name=Start TestFlow
+epx.tasklist.task1.flowname=TestFlow
+epx.tasklist.task1.startingpoint=Start
+epx.tasklist.task1.workitemname=TestFlow
+epx.tasklist.task1.workitemdescription=TestFlow
+epx.tasklist.task1.proplist=prop1,prop2
+epx.tasklist.task1.props.prop1.name=test1
+epx.tasklist.task1.props.prop1.value=test1val
+epx.tasklist.task1.props.prop2.name=test2
+epx.tasklist.task1.props.prop2.value=test2val
+epx.tasklist.task1.groupList=Administrator
+epx.tasklist.task1.userList=admin
+
+########################################################################
+#
+# Switch for displaying subscription related menus
+#
+# 0 - supply side instance
+# 1 - demand side instance
+#
+########################################################################
+epim.instance.type=2
+
+########################################################################
+#
+# Switch for enabling customer repository support
+#
+# 1 - enable customer repositories
+# 0 - disable customer repositories
+#
+########################################################################
+enable.customer.repository=0
+
+epim.default.datapool.type=uccnet
+
+# The codeSet name that is used to update item in validation.  For Future Use; not currently supported.
+#validate.update.value.codeset.name=Product Unit Descriptor
+
+# Switch to turn on dimensional view query.  For Future Use; not currently supported.
+view.data.dimension=0
+view.data.dimension.attribute=Target Market Country Code,UDEX Category Code,Brand Name,Country Of Origin,Trade Item Identification Of Next Lower Trade Item
+
+#
+# Data cache settings
+#
+datacache.enable=true
+datacache.capacity=500
+
+#
+# Text search result markup settings
+#
+text.search.markup=true
+text.search.markup.start.tag=<B>
+text.search.markup.end.tag=</B>
+
+#
+# Text search index update setting
+#
+text.search.index.autoUpdate=false
+
+#
+# Item Search List of Attribute to display
+# 1 = GTIN, 15 - Brand Name, 17 - Description, 18- Additional Long Description
+item.search.showAttributeId = 1,15,17,18
+
+#
+# Item History - spend time to figure out if an attribute has actually
+#                been changed before storing a RepositoryItemHistory item,
+#                or just store a RepositoryItemHistory item without checking. 
+# true = spend time to check for changes     false =  just store the history item
+item.history.checkForChanges = true
+
+# code set dynamic attribute import file directory
+codeSet.input.path=C:/Enterworks/EnableServer71/codeSet
+codeSet.log.path=C:/Enterworks/EnableServer71/log/codeSet
+
+codeSet.import.clearFormatAttrInCodeSetLevelFlag=true
+
+# media file type associations to file extensions
+media.DOC.file.extensions=doc,txt
+media.IMAGE.file.extensions=jpg,jpeg,bmp,jif,gif,cmp
+media.AUDIO.file.extensions=wav,mp3
+media.VIDEO.file.extensions=avi
+
+# snapshot population log directory
+snapshot.log.path=C:/Enterworks/EnableServer71/log/snapshot
+# create snapshot friendly view setting, 1 to create using rerpository name, 0 to create using rerpository tab name
+snapshot.view.use.repo.name=1
+
+# API maximum number of items to return in one searchItem() call
+API.maxItemsToReturn=1000
+
+# Oracle optimizer version - used in searchItem() call.
+oracle.optimizer=
+
+# to allow a user login and a group name to be identical 
+users.groups.allowIdenticalNames=true
+
+# string to substitute illegal XML characters with when found in item data
+illegal.XML.char.substitute=#ILLEGAL#
+
+#########################################################################
+#
+#  3rdParty Applications and EPIM Integration Settings
+#
+fromApp.list=enable
+#
+#  enable and EPIM Integration Settings
+#
+fromApp.enable.baseUrl=http://ABYSS:80/enable7
+fromApp.enable.enableSingleWinEdit=false
+fromApp.enable.enableStyle=enable
+fromApp.enable.name=enable
+fromApp.enable.trustedSignOn=true
+fromApp.enable.gId=**********
+fromApp.enable.webservice.port=80
+fromApp.enable.webservice.wsdlLocation=EnableSecurityService.svc?wsdl
+fromApp.enable.version=7.0
+fromApp.enable.use.epim=1
+
+
+###################################################################
+#
+# Pending Request Settings
+#
+###################################################################
+
+pendingRequest.approvalRequiredIndicatorDefault=true
+
+#########################################################################
+#
+#  Dynamic Item Security Filter Attribute Variables
+#
+dynamicItemSecurityFilterVariables.list=userId,userName,groupName,externalSessionInfo
+dynamicItemSecurityFilterVariables.userId=Buser.getUserId
+dynamicItemSecurityFilterVariables.userName=Buser.getLogin
+dynamicItemSecurityFilterVariables.groupName=Bgroup.getName
+dynamicItemSecurityFilterVariables.externalSessionInfo=Bsession.getExternalSessionInfo
+dynamicItemSecurityFilterVariables.externalSessionInfo.key.indicator=:
+dynamicItemSecurityFilterVariables.externalSessionInfo.subInfo.group.delimiter=||
+dynamicItemSecurityFilterVariables.externalSessionInfo.subInfo.keyVal.delimiter=,
+
+##########################################################################
+#
+# max file download size (default to 10MB) 
+#
+max.file.download.size=100
+
+###################################################################
+#
+# Include ItemState fields in export that uses a User Preference.  (All ItemState
+# fields are always included in an export that does NOT use a user Preference.)
+# Valid values are:
+#          None - do not include ItemId or any other Item State fields 
+#          ItemId - include ItemId (no other Item State fields) 
+#          All - include ItemId and all other Item State fields
+#
+###################################################################
+export.itemStateFieldsToInclude=None
+
+###################################################################
+#
+# For Repository Attributes of type Decimal and Currency, 
+# attribute.decimal.format.option gives an implementation the
+# following options:   None = no formatting changes made
+#                      NoScalePadGlobal = apply formatting to all attributes, but do not pad with zero
+#                      ScalePadGlobal = apply formatting to all attributes, including pad with zero
+#                      ScalePadAttrDefined = apply formatting according to each attribute definition
+#
+###################################################################
+attribute.decimal.format.option=ScalePadAttrDefined
+
+###################################################################
+# validation callout class settings
+# 
+# the following entries are required:
+#   
+# global setting to enable/disable callout class list
+# false if validation.callout.class.list should be ignored, and no
+# drop-down list displayed on UI
+#
+#   validation.callout.class.list.allow=true (or false)
+#
+# callout class names (list the class names, case sensitive)
+#
+#   validation.callout.class.list=Class1,Class2
+#
+# define callout classpaths
+#
+# examples:
+#
+#   validation.callout.class1.classpath=com.enterworks.ussco.validation.Class1
+#
+# to remove one particular callout class, remove it from the validation.callout.class.list 
+# 
+###################################################################
+validation.callout.class.list.allow=true
+validation.callout.class.list=AttributesCalc,AttributesSearchAndUpdate,CheckAttributeCodeSetName,IsLengthLessThan,MatchesPattern,NoBlanks,NoInvalidCharacters,ValidCharacters,ValidReference,ValidDimensions,AttributesSearchAndCalculate
+
+# define classpath for AttributesCalc
+validation.callout.AttributesCalc.classpath=com.enterworks.epim.shared.validation.AttributesCalc
+validation.callout.AttributesSearchAndUpdate.classpath=com.enterworks.epim.shared.validation.AttributesSearchAndUpdate
+validation.callout.AttributesSearchAndCalculate.classpath=com.enterworks.epim.shared.validation.AttributesSearchAndCalculate
+validation.callout.CheckAttributeCodeSetName.classpath=com.enterworks.epim.shared.validation.CheckAttributeCodeSetName
+validation.callout.IsLengthLessThan.classpath=com.enterworks.epim.shared.validation.IsLengthLessThan
+validation.callout.MatchesPattern.classpath=com.enterworks.epim.shared.validation.MatchesPattern
+validation.callout.NoBlanks.classpath=com.enterworks.epim.shared.validation.NoBlanks
+validation.callout.NoInvalidCharacters.classpath=com.enterworks.epim.shared.validation.NoInvalidCharacters
+validation.callout.ValidCharacters.classpath=com.enterworks.epim.shared.validation.ValidCharacters
+validation.callout.ValidReference.classpath=com.enterworks.epim.shared.validation.ValidReference
+validation.callout.ValidDimensions.classpath=com.enterworks.epim.shared.validation.ValidDimensions
+#validation.callout.SecondClass.classpath=com.enterworks.ussco.validation.SecondClass
+
+
+###################################################################
+# pubContext callout class settings
+# 
+# the following entries are required:
+#   
+# global setting to enable/disable callout class list
+# false if pubContext.callout.class.list should be ignored, and no
+# drop-down list displayed on UI
+#
+#   pubContext.callout.class.list.allow=true (or false)
+#
+# callout class names (list the class names, case sensitive)
+#
+#   pubContext.callout.class.list=Class1,Class2
+#
+# define callout classpaths
+#
+# examples:
+#
+#   pubContext.callout.class1.classpath=com.enterworks.ussco.pubcontext.Class1
+#
+# to remove one particular callout class, remove it from the pubContext.callout.class.list 
+# 
+###################################################################
+pubContext.callout.class.list.allow=true
+pubContext.callout.class.list=JohnStoneCustomPublish,
+
+# define classpath for JohnStoneCustomPublish
+pubContext.callout.JohnStoneCustomPublish.classpath=com.enterworks.epim.shared.publish.JohnStoneCustomPublish
+pubContext.callout.JohnStoneCustomPublish.price.table=JohnStonePrice
+pubContext.callout.JohnStoneCustomPublish.price.repo=PIM_WHSE_Staging
+
+###################################################################
+# Extended Editor Setup
+# 
+# the extended editor popup window's width and height in pixels
+extended.editor.window.width=800
+extended.editor.window.height=800
+# the extended editor popup window's field size (in chars)
+extended.editor.field.size=40
+# if this property is set to sure, then the identifier group is displayed, otherwise it is not displayed 
+extended.editor.window.group.identifier.display=true
+########################################################################
+
+###################################################################
+# Setup Import Attribute Mapping Page with Extended Data
+# 
+setup.import.attr.mapping.ui.extended.attr.premapping.exactMatch=false
+setup.import.prevalidation.nonpkdata.default=false
+setup.import.prevalidation.columncount.default=false
+setup.import.prevalidation.columndata.default=false
+setup.import.prevalidation.datarequired.default=false
+setup.import.prevalidation.businesskeys.default=false
+setup.import.validateAfterwards.default=false
+setup.import.show.warning=false
+setup.import.ignoreWhiteSpace.default=true
+#
+
+###################################################################
+#
+# set to true to calculate a new value for ITEM_ACTION_STATUS when an
+# item is updated (used for older UCCNET profiles).
+#
+###################################################################
+storeItem.calculateNewItemActionStatus=false
+
+
+###################################################################
+#
+# data.cache.load.repositories:  comma-separated list of repositories
+#                                for epim to load into cache at startup.
+#
+#       ** repositories to include here are those that contain many
+#          attributes (over 100) and also those that get accessed via
+#          storeItem() call-out trigger processing.
+#
+###################################################################
+data.cache.load.repositories=
+
+
+#########################################################################
+# Pending Request Import Setting 
+# For the true value, the new pending's field APPROVAL_REQUIRED_IND is set to 1; 
+# otherwise it is set to 0
+#########################################################################
+pendingRequest.import.newPending.approvalRequired=true
+
+#########################################################################
+# pubImageTypeCodeSetName - Image Type codeset used for syndication job  
+# pubImageContextCodeSetName - Image Context codeset used for syndication job 
+#########################################################################
+pubImageTypeCodeSetName=ImageTypeList
+pubImageContextCodeSetName=Image Context
+
+#########################################################################
+# 
+# Show/Hide the domain menu on Nav Tree
+# The default is set to hide the menu
+#
+#########################################################################
+showNavTreeDomainMenu=false
+
+#########################################################################
+# 
+# When a changed codeset is used by a repository, this property is used to specify: 
+# if both Staging and Production versions or only Staging version of the repository need to be updated, 
+# if that repository follows the _STAGING and _PRODUCTION nomenclature; 
+# The default would be to just update both _STAGING and _PRODUCTION.  
+#
+# The defined values: All - for both _STAGING and _PRODUCTION repos; 
+#                     Staging - for staging only repos
+#
+#########################################################################
+codeset.codeChange.repo.updateTypeOption=All
+
+
+###################################################################
+# Repository Promotion Configuration
+# 
+###################################################################
+
+#repo.promote.config.list=promoteProd,
+
+repo.promote.config.promoteProd.desc=Promote Product Items
+repo.promote.config.promoteProd.srcRepo.name=PIM_Product_Staging
+repo.promote.config.promoteProd.srcRepo.linkList=link1,
+repo.promote.config.promoteProd.srcRepo.linkList.link1.name=
+
+# Optional
+repo.promote.config.promoteProd.srcRepo.updateStatus.list=status1,status2,
+repo.promote.config.promoteProd.srcRepo.updateStatus.status1.name=RECORD_STATE
+repo.promote.config.promoteProd.srcRepo.updateStatus.status1.value=0
+repo.promote.config.promoteProd.srcRepo.updateStatus.status2.name=EXTERNAL_SESSION_INFO
+repo.promote.config.promoteProd.srcRepo.updateStatus.status2.value=promote
+
+repo.promote.config.promoteProd.srcRepo.updateAttr.list=attr1
+repo.promote.config.promoteProd.srcRepo.updateAttr.attr1.name=Status
+repo.promote.config.promoteProd.srcRepo.updateAttr.attr1.value=Active
+
+
+repo.promote.config.promoteProd.targetRepo.updateStatus.list=status1,status2,
+repo.promote.config.promoteProd.targetRepo.updateStatus.status1.name=RECORD_STATE
+repo.promote.config.promoteProd.targetRepo.updateStatus.status1.value=0
+repo.promote.config.promoteProd.targetRepo.updateStatus.status2.name=EXTERNAL_SESSION_INFO
+repo.promote.config.promoteProd.targetRepo.updateStatus.status2.value=promote
+
+repo.promote.config.promoteProd.targetRepo.updateAttr.list=attr1
+repo.promote.config.promoteProd.targetRepo.updateAttr.attr1.name=Status
+repo.promote.config.promoteProd.targetRepo.updateAttr.attr1.value=Active
+
+###################################################################
+# Repository Record Reorder Configuration
+# 
+###################################################################
+repo.reorder.record.max.size=1000
+repo.reorder.record.summary.max.length=100
+repo.reorder.largeSequenceListSizeForImportJob=500
+
+#**************************************************************************
+#############################################################################
+# Add or Update Properties below for Customizing an implementation only
+#############################################################################
+
+###################################################################
+# external event handler settings
+# 
+# the following entries are required:
+#   
+# global setting to enable/disable external event handling
+# false if all event handlers should be ignored
+#
+#   allow.external.event.handler=true (or false)
+#
+# external event handlers (list the handler names, case sensitive)
+#
+#   external.event.handlers=handler1,handler2
+#
+# define external event handlers
+#  - type is the event type, current only supports value of 0 (item store event)
+#  - sync is the event sync/async indicator, if and only if it is set to true, the event is a synchronous event, otherwise it is an asynchronous evnet.
+#  - classname is the java class name, must be present in ePIM jboss and tomcat 
+#  - target.repository is the repository name the event handler is registered to
+#
+# examples:
+#
+#   external.event.handler1.type=0
+#   external.event.handler1.classname=com.enterworks.epim.shared.util.TestEventHandler
+#   external.event.handler1.target.repository=SmallFileTest
+#
+#   external.event.handler2.type=0
+#   external.event.handler2.classname=com.my.TestClass2
+#   external.event.handler2.target.repository=TestRepo2
+#
+# to disable one particular handler, remove it from the external.event.handlers 
+# 
+###################################################################
+allow.external.event.handler=false
+external.event.handlers=handler1
+
+# define external event handler1
+external.event.handler1.passInDBSessionInd=true
+external.event.handler1.type=0
+external.event.handler1.sync=false
+external.event.handler1.classname=com.enterworks.epim.shared.util.TestEventHandler
+external.event.handler1.target.repository=SmallFileTest
+
+#########################################################################
+# CUSTOM Import Config
+#########################################################################
+#custom.import.config.list=customimport1,
+#custom.import.config.customimport1.action=CustomImport
+#custom.import.config.customimport1.repoName=PIM_Item_Staging
+#custom.import.config.customimport1.repoExtendedLinkName=Extended
+#custom.import.config.customimport1.label=Custom Import
+#custom.import.config.customimport1.detail.list=import1
+
+#custom.import.config.customimport1.detail.import1.topRepoName=PIM_ProductLine_Staging
+#custom.import.config.customimport1.detail.import1.topRepoViewName=ProductLine
+#custom.import.config.customimport1.detail.import1.levelInfo.list=L1,L2,L3
+#custom.import.config.customimport1.detail.import1.levelInfo.L1.RepoName=PIM_Product_Staging
+#custom.import.config.customimport1.detail.import1.levelInfo.L1.RepoLinkName=Product Line to SKU Grp
+#custom.import.config.customimport1.detail.import1.levelInfo.L1.RepoViewName=Product
+#custom.import.config.customimport1.detail.import1.levelInfo.L2.RepoName=PIM_Item_Staging
+#custom.import.config.customimport1.detail.import1.levelInfo.L2.RepoLinkName=SKU Group Item
+#custom.import.config.customimport1.detail.import1.levelInfo.L2.RepoViewName=Item
+#custom.import.config.customimport1.detail.import1.levelInfo.L3.RepoName=PIM_Extended_Staging
+#custom.import.config.customimport1.detail.import1.levelInfo.L3.RepoLinkName=Extended
+#custom.import.config.customimport1.detail.import1.levelInfo.L3.RepoViewName=Extended
+#custom.import.config.customimport1.detail.import1.levelInfo.L3.ExtendedIndicator=1
+
+#########################################################################
+# CUSTOM Export Trigger Config
+#########################################################################
+#export.external.event.handlers=eh1,
+#export.external.event.eh1.classname=com.enterworks.shared.util.CustomExportCallOut
+#export.external.event.eh1.target.repository=PIM_Item_Staging
+
+
+###################################################################
+# Job Controller Repository Concurrency Settings 
+# 
+# Default operation for the Job Controller is to allow only 1 job per repository.
+# Since Publication jobs are single-threaded (thus not using up all available epim job
+# threads), the following property may be set to allow other jobs to run concurrently 
+# with Publication jobs.  There is a choice to allow data-export jobs (such as Export, 
+# Migration In/Out, Snapshot, SavedSetImport) to run during a Publication job, and to 
+# allow all types of jobs to run during a Publication job.
+#
+#
+# job.controller.type:
+#     0 = independant
+#     1 = master
+#     2 = slave
+#
+#
+# job.controller.concurrency only for independant:
+#     0 = none
+#     1 = allow jobs to run concurrently when data-export job is running
+#     2 = allow jobs to run concurrently when publication job is running
+#
+# job.controller.type
+job.controller.type=0
+job.controller.master=ABYSS:8034
+job.controller.slave.list=
+job.controller.concurrency=2
+
+#########################################################################
+# Snapshot 
+#########################################################################
+filter.distinct.search.value.limit=5000
+
+#########################################################################
+# Language Boundle.  
+# The format is language_country_variant (eg. en_au_UNIX).  country and variant are optional.
+# The message file will be Messages_en_au_UNIX.properties
+#########################################################################
+language.list=fr
+language.default=

@@ -25,6 +25,8 @@ namespace ConfigTool
         string fileData = "";
         int rowIndex = -1;
         int MRUnumber = 10;
+        int indexOfInsertion = -1;
+        bool newRow = false;
 
         ServiceController svc1;// = new ServiceController("EnableServer71_Enable_JBOSS_8034");
         ServiceController svc2;// = new ServiceController("EnableServer71_Enable_TOMCAT_8090");
@@ -34,6 +36,7 @@ namespace ConfigTool
             InitializeComponent();
             dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
             dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
+            dataGridView1.MouseDown += new MouseEventHandler(dataGridView1_MouseDown);
             rbJboss.Click += new EventHandler(radioButton1_Click);
             rbSynchronizedEdit.Click += new EventHandler(rbSynchronizedEdit_Click);
             this.DragEnter += new DragEventHandler(ConfigEditorForm_DragEnter);
@@ -52,16 +55,12 @@ namespace ConfigTool
             }
         }
 
-        void rbSynchronizedEdit_Click(object sender, EventArgs e)
-        {
-            rbSynchronizedEdit.Checked = !rbSynchronizedEdit.Checked;
-        }
-
         public ConfigEditorForm(string arg)
         {
             InitializeComponent();
             dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
             dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
+            dataGridView1.MouseDown += new MouseEventHandler(dataGridView1_MouseDown);
             rbJboss.Click += new EventHandler(radioButton1_Click);
             rbSynchronizedEdit.Click += new EventHandler(rbSynchronizedEdit_Click);
             this.DragEnter += new DragEventHandler(ConfigEditorForm_DragEnter);
@@ -99,38 +98,30 @@ namespace ConfigTool
                 e.Effect = DragDropEffects.Copy;
         }
 
-        private void GetServices()
-        {
-            ServiceController[] services = ServiceController.GetServices();
-
-            foreach (ServiceController srvc in services)
-            {
-                if (srvc.DisplayName.Contains("Enable"))
-                {
-                    if(srvc.DisplayName.Contains("JBOSS"))
-                    {
-                        svc1 = new ServiceController(srvc.DisplayName);
-                    }else if(srvc.DisplayName.Contains("TOMCAT"))
-                    {
-                        svc2 = new ServiceController(srvc.DisplayName);
-                    }
-                }
-            }
-        }
-
         void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex != -1)
             {
-                if (e.ColumnIndex > 0)
+                //if its a new row we don't have an old value yet so, don't do this.
+                if (!newRow)
                 {
-                    oldValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString()
-                                     + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    if (e.ColumnIndex > 0)
+                    {
+                        oldValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString()
+                                         + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    }
+                    else if(e.ColumnIndex == 0)
+                    {
+                        oldValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()
+                                         + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString();
+                    }
                 }
                 else
-                {
-                    oldValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()
-                                     + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString();
+                {// new row, get the value from the row previous to this one and use it as the old value.
+                    oldValue = dataGridView1.Rows[e.RowIndex - 1].Cells[0].Value.ToString()
+                                + "=" + dataGridView1.Rows[e.RowIndex - 1].Cells[1].Value.ToString();
+                   
                 }
             }
         }
@@ -144,7 +135,7 @@ namespace ConfigTool
                 file = openFileDialog1.FileName;
                 try
                 {
-                    LoadGridView(file);             
+                    LoadGridView(file);
                 }
                 catch (IOException)
                 {
@@ -154,23 +145,68 @@ namespace ConfigTool
 
         void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            // check to make sure the property column has a value before going any further!
             string newValue = "";
-
-            if (e.ColumnIndex > 0)
+            if (!newRow)
             {
-                newValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString()
-                                 + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (e.ColumnIndex > 0)
+                {
+                    newValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString()
+                                     + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else
+                {
+                    newValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()
+                                     + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString();
+                }
+                ReplaceInFile(file, oldValue, newValue);
             }
             else
             {
-                newValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()
-                                 + "=" + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString();
+                if (string.IsNullOrEmpty(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()))
+                {
+                    MessageBox.Show("The Row's Property must be filled in before setting it's Value");
+                }
+                else if (string.IsNullOrEmpty(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()))
+                {
+                    return;
+                }
+                else
+                {
+                    newValue = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() 
+                                + "=" + dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                    ReplaceInFile(file, oldValue, newValue);
+                }
+
+                
+                //!string.IsNullOrEmpty(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString())
+                //dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[0];
+
             }
 
-           ReplaceInFile(file, oldValue, newValue);
+            
         }
 
-        public  void LoadGridView(string path)
+        void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo hit = dataGridView1.HitTest(e.X, e.Y);
+                if (hit.Type == DataGridViewHitTestType.Cell)
+                {
+                    dataGridView1.CurrentCell = dataGridView1[hit.ColumnIndex, hit.RowIndex];
+                    contextMenuStrip1.Show(dataGridView1, e.X, e.Y);
+                }
+            }
+        }
+
+        void rbSynchronizedEdit_Click(object sender, EventArgs e)
+        {
+            rbSynchronizedEdit.Checked = !rbSynchronizedEdit.Checked;
+        }
+
+        public void LoadGridView(string path)
         {
             SaveRecentFile(path);
 
@@ -206,17 +242,17 @@ namespace ConfigTool
 
             string[] kvp;
             records = fileData.Split("\r\n".ToCharArray());
-            
+
             foreach (string record in records)
             {
                 if ((!Regex.IsMatch(record, "# "))
-                    &&((!record.StartsWith("#") && record.Trim().Length > 0)//all active settings/ no empty lines
+                    && ((!record.StartsWith("#") && record.Trim().Length > 0)//all active settings/ no empty lines
                     || (record.StartsWith("#") && record.Contains("="))))
                 {
-                    kvp = record.Split(new char[] { '=' }, 2); 
+                    kvp = record.Split(new char[] { '=' }, 2);
                     dataGridView1.Rows.Add(kvp[0], kvp[1]);
                 }
-                
+
             }
 
         }
@@ -225,32 +261,64 @@ namespace ConfigTool
         {
 
             string content;
-            content = GetFileContents(filePath);
-            content = Regex.Replace(content, searchText, replaceText);
+            if (!newRow)
+            {
+                content = GetFileContents(filePath);
+                content = Regex.Replace(content, searchText, replaceText);
+            }
+            else
+            {
+                string[] full_file = File.ReadAllLines(filePath);
+                List<string> l = new List<string>();
+                l.AddRange(full_file);
+                int idx = l.FindIndex(s => s.Contains(searchText));
+                l.Insert(idx+1, replaceText);
+                content = string.Join("\r\n",l.ToArray());
+                //OverWriteFile("test.txt", content);
+                //int x = 0;
+            }
+
             OverWriteFile(filePath, content);
 
             if (rbSynchronizedEdit.Checked)
             {
-                string[] items = filePath.Split(new char[] {'\\'});
+                string[] items = filePath.Split(new char[] { '\\' });
 
                 string firstPart = string.Join("\\", items.Take(3).ToArray());
 
                 if (filePath.ToLower().Contains("jboss"))
                 {
-                    filePath = Path.Combine(firstPart, 
-                                            Path.Combine(ConfigurationManager.AppSettings["TomcatPath"], items[items.Length -1]));
+                    filePath = Path.Combine(firstPart,
+                                            Path.Combine(ConfigurationManager.AppSettings["TomcatPath"], items[items.Length - 1]));
                 }
-                else if(filePath.ToLower().Contains("tomcat"))
+                else if (filePath.ToLower().Contains("tomcat"))
                 {
-                    filePath = Path.Combine(firstPart, 
+                    filePath = Path.Combine(firstPart,
                                             Path.Combine(ConfigurationManager.AppSettings["JbossPath"], items[items.Length - 1]));
                 }
-                OverWriteFile(filePath, content);
+
+                if (!newRow)
+                {
+                    content = GetFileContents(filePath);
+                    content = Regex.Replace(content, searchText, replaceText);
+                }
+                else
+                {
+                    string[] full_file = File.ReadAllLines(filePath);
+                    List<string> l = new List<string>();
+                    l.AddRange(full_file);
+                    int idx = l.FindIndex(s => s.Contains(searchText));
+                    l.Insert(idx + 1, replaceText);
+                    content = string.Join("\r\n", l.ToArray());
+                    //OverWriteFile("test.txt", content);
+                    //int x = 0;
+                }
+                 OverWriteFile(filePath, content);
             }
 
 
 
-            
+
         }
 
         private string GetFileContents(string fileFullPath)
@@ -270,7 +338,7 @@ namespace ConfigTool
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             Application.Exit();
         }
 
@@ -289,10 +357,10 @@ namespace ConfigTool
             else
             {
                 encryptor = ConfigurationManager.AppSettings["EncryptPassword"];
-            } 
+            }
             //string encryptor = ConfigurationManager.AppSettings["Jboss"];
             //System.Diagnostics.Process.Start("cmd.exe", "/c " + encryptor + " "+ toEncrypt);
-            ProcessStartInfo psi = new ProcessStartInfo(encryptor + " ",toEncrypt);
+            ProcessStartInfo psi = new ProcessStartInfo(encryptor + " ", toEncrypt);
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
@@ -302,7 +370,7 @@ namespace ConfigTool
             System.IO.StreamReader myoutput = proc.StandardOutput;
             proc.WaitForExit(2000);
 
-            
+
 
             if (proc.HasExited)
             {
@@ -318,25 +386,25 @@ namespace ConfigTool
             {
                 tbEncryptedPassword.Text = result.Replace("EncryptedString=", "");
             }
-            
-                
+
+
         }
 
         private void btnRestartSvcs_Click(object sender, EventArgs e)
         {
-           if (svc1.Status.Equals(ServiceControllerStatus.Running))
+            if (svc1.Status.Equals(ServiceControllerStatus.Running))
             {
                 svc1.Stop();
                 svc1.WaitForStatus(ServiceControllerStatus.Stopped);
                 rbJBossStatus.Checked = !rbJBossStatus.Checked;
-                
+
             }
             else
             {
                 svc1.Start();
                 svc1.WaitForStatus(ServiceControllerStatus.Running);
                 rbJBossStatus.Checked = !rbJBossStatus.Checked;
-                
+
             }
 
             System.Threading.Thread.Sleep(3);
@@ -381,8 +449,8 @@ namespace ConfigTool
             if (!(MRUlist.Contains(path))) //prevent duplication on recent list
                 MRUlist.Insert(0, path); //insert given path into list
             //keep list number not exceeded the given value
-            
-            if(MRUlist.Count > MRUnumber)
+
+            if (MRUlist.Count > MRUnumber)
             {
                 MRUlist.RemoveRange(MRUnumber - 1, MRUnumber - MRUlist.Count);
             }
@@ -390,7 +458,7 @@ namespace ConfigTool
             foreach (string item in MRUlist)
             {
                 //create new menu for each item in list
-                ToolStripMenuItem fileRecent = 
+                ToolStripMenuItem fileRecent =
                         new ToolStripMenuItem(item, null, RecentFile_click);
                 //add the menu to "recent" menu
                 recentToolStripMenuItem.DropDownItems.Add(fileRecent);
@@ -407,13 +475,33 @@ namespace ConfigTool
             stringToWrite.Flush(); //write stream to file
             stringToWrite.Close(); //close the stream and reclaim memory
         }
-		
-		private void CheckServices()
+
+        private void CheckServices()
         {
             rbJBossStatus.Checked = svc1.Status.Equals(ServiceControllerStatus.Running);
             rbTomcatStatus.Checked = svc2.Status.Equals(ServiceControllerStatus.Running);
             if (rbJBossStatus.Checked && rbTomcatStatus.Checked)
                 btnRestartSvcs.Text = "Stop Svcs";
+        }
+
+        private void GetServices()
+        {
+            ServiceController[] services = ServiceController.GetServices();
+
+            foreach (ServiceController srvc in services)
+            {
+                if (srvc.DisplayName.Contains("Enable"))
+                {
+                    if (srvc.DisplayName.Contains("JBOSS"))
+                    {
+                        svc1 = new ServiceController(srvc.DisplayName);
+                    }
+                    else if (srvc.DisplayName.Contains("TOMCAT"))
+                    {
+                        svc2 = new ServiceController(srvc.DisplayName);
+                    }
+                }
+            }
         }
 
         private void LoadRecentList()
@@ -426,7 +514,7 @@ namespace ConfigTool
               new StreamReader(System.Environment.CurrentDirectory + "\\Recent.txt");
                 string line;
                 while ((line = listToRead.ReadLine()) != null) //read each line until end of file
-                    MRUlist.Insert(0,line); //insert to list
+                    MRUlist.Insert(0, line); //insert to list
                 listToRead.Close(); //close the stream
             }
             catch (Exception) { }
@@ -460,7 +548,7 @@ namespace ConfigTool
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
-            }        
+            }
         }
 
         private void ConfigEditorForm_DragOver(object sender, DragEventArgs e)
@@ -471,12 +559,24 @@ namespace ConfigTool
                 e.Effect = DragDropEffects.None;
         }
 
+        private void insertNewRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int x = 0;
+            indexOfInsertion = dataGridView1.CurrentRow.Index+1;
+            DataGridViewRow dr = new DataGridViewRow();
+            dr.CreateCells(dataGridView1, new string[] { "", "" });
+            dr.SetValues(new string[] { "", "" });
+            dataGridView1.Rows.InsertRange(indexOfInsertion, dr);
+            //dataGridView1.Sort(dataGridView1.Columns[0], System.ComponentModel.ListSortDirection.Descending);
+            newRow = true;
+        }
+
 
     }
 
     public class RowData
     {
-        public RowData(int line,string prop,string val)
+        public RowData(int line, string prop, string val)
         {
             this.LineNumber = line;
             this.Property = prop;
